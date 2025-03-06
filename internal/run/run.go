@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/110y/go-test-name/internal/analysis"
+	"github.com/asao1524/go-test-name/internal/analysis"
 )
 
 func Run() {

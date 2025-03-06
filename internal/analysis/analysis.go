@@ -9,7 +9,7 @@ import (
 
 	"golang.org/x/tools/go/packages"
 
-	"github.com/110y/go-test-name/internal/analysis/internal/visitor"
+	"github.com/asao1524/go-test-name/internal/analysis/internal/visitor"
 )
 
 var pkgConfigMode = packages.NeedName |

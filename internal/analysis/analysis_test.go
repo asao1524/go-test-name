@@ -7,7 +7,7 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 
-	"github.com/110y/go-test-name/internal/analysis"
+	"github.com/asao1524/go-test-name/internal/analysis"
 )
 
 func TestGetTestInfo(t *testing.T) {

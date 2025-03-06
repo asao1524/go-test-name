@@ -1,6 +1,6 @@
 package main
 
-import "github.com/110y/go-test-name/internal/run"
+import "github.com/asao1524/go-test-name/internal/run"
 
 func main() {
 	run.Run()
