@@ -42,6 +42,22 @@ func TestGetTestInfo(t *testing.T) {
 				SubTestNames: []string{`sub test name`},
 			},
 		},
+		"should return TestInfo includes expected TestFuncName and SubTestNames for slice-based table driven tests": {
+			path: "package1/file1_test.go",
+			pos:  1150,
+			expected: &analysis.TestInfo{
+				TestFuncName: "TestBaz",
+				SubTestNames: []string{`slice based sub test name`},
+			},
+		},
+		"should return TestInfo includes expected TestFuncName and SubTestNames with escaping regexp meta characters for slice-based table driven tests": {
+			path: "package1/file1_test.go",
+			pos:  1250,
+			expected: &analysis.TestInfo{
+				TestFuncName: "TestBaz",
+				SubTestNames: []string{`slice based sub test name with \(regexp meta characters\)`},
+			},
+		},
 	}
 
 	for name, test := range tests {

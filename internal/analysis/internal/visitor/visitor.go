@@ -93,6 +93,31 @@ func (v *Visitor) extractSubTestNamesFromCompositeLit(clit *ast.CompositeLit) bo
 				}
 			}
 		}
+		return false
+	}
+
+	if _, ok := clit.Type.(*ast.ArrayType); ok {
+		for _, elt := range clit.Elts {
+			if v.cursorPos >= v.getPositionOffset(elt.Pos()) && v.cursorPos <= v.getPositionOffset(elt.End()) {
+				if subclit, ok := elt.(*ast.CompositeLit); ok {
+					for _, subelt := range subclit.Elts {
+						if kve, ok := subelt.(*ast.KeyValueExpr); ok {
+							if ident, ok := kve.Key.(*ast.Ident); ok && ident.Name == "name" {
+								if bl, ok := kve.Value.(*ast.BasicLit); ok && bl.Kind == token.STRING {
+									s, err := strconv.Unquote(bl.Value)
+									if err != nil {
+										return true
+									}
+									v.subTestNames = append(v.subTestNames, regexp.QuoteMeta(s))
+									return true
+								}
+							}
+						}
+					}
+				}
+				return true
+			}
+		}
 	}
 	return false
 }

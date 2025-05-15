@@ -57,3 +57,33 @@ func TestBar(t *testing.T) {
 		})
 	}
 }
+
+func TestBaz(t *testing.T) {
+	t.Parallel()
+
+	tests := []struct {
+		name     string
+		expected string
+	}{
+		{
+			name:     "slice based sub test name",
+			expected: "expected",
+		},
+		{
+			name:     "slice based sub test name with (regexp meta characters)",
+			expected: "expected",
+		},
+	}
+
+	for _, test := range tests {
+		test := test
+		t.Run(test.name, func(t *testing.T) {
+			t.Parallel()
+
+			actual := "actual"
+			if diff := cmp.Diff(test.expected, actual); diff != "" {
+				t.Errorf("\n(-expected, +actual)\n%s", diff)
+			}
+		})
+	}
+}
